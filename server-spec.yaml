@@ -15,6 +15,7 @@ externalDocs:
 paths:
   /todos:
     delete:
+      x-jvm-package: TodoList
       summary: remove all todos
       description: ""
       operationId: deleteAllTodos
@@ -22,6 +23,7 @@ paths:
         "200":
           description: successful operation
     post:
+      x-jvm-package: TodoList
       summary: Add a new todo
       description: ""
       operationId: addTodo
@@ -41,6 +43,7 @@ paths:
               schema:
                 type: string
     get:
+      x-jvm-package: TodoList
       summary: view all known Todos
       description: ""
       operationId: getTodoList
@@ -57,6 +60,7 @@ paths:
           description: Database error
   "/todos/{todoId}":
     get:
+      x-jvm-package: TodoInstance
       summary: Details of one Todo
       description: ""
       operationId: getTodoById
@@ -77,6 +81,7 @@ paths:
         "404":
           description: Invalid Todo ID value
     delete:
+      x-jvm-package: TodoInstance
       summary: delete a single todo
       description: ""
       operationId: deleteTodoById
@@ -93,6 +98,7 @@ paths:
         "404":
           description: can not find todo
     patch:
+      x-jvm-package: TodoInstance
       summary: Update an existing Todo
       description: ""
       operationId: updateTodoById
