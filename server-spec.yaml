@@ -1,17 +1,11 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   description: Todo Backend API
   version: 1.0.0
   title: Todos API
-  termsOfService: http://nick.gs/
-  contact:
-    email: nick@nick.gs
-  license:
-    name: GPL
-    url: http://www.fsf.org
 externalDocs:
-  description: Example REST API using Scala, Guardrail
-  url: https://github.com/nickfun/learning-guardrail
+  description: Example REST API using Java, Guardrail
+  url: https://github.com/nickfun/demowizard
 paths:
   /todos:
     delete:
@@ -57,7 +51,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Todo"
         "500":
-          description: Database error
+          description: Application error
   "/todos/{todoId}":
     get:
       x-jvm-package: TodoInstance

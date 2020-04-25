@@ -21,13 +21,12 @@ public class demowizardApplication extends Application<demowizardConfiguration> 
 
     @Override
     public void initialize(final Bootstrap<demowizardConfiguration> bootstrap) {
-        // TODO: application initialization
+        // when needed, application initialization
     }
 
     @Override
     public void run(final demowizardConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
         environment.jersey().register(new TodoInstanceResource(new TodoInstanceHandlerImpl()));
         environment.jersey().register(new TodoListResource(new TodoListHandlerImpl()));
     }
