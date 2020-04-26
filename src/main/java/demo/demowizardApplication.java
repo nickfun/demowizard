@@ -1,5 +1,6 @@
 package demo;
 
+import demo.db.TodoDb;
 import demo.resources.TodoInstanceHandlerImpl;
 import demo.resources.TodoListHandlerImpl;
 import demowizard.generated.TodoInstance.TodoInstanceResource;
@@ -27,8 +28,10 @@ public class demowizardApplication extends Application<demowizardConfiguration> 
     @Override
     public void run(final demowizardConfiguration configuration,
                     final Environment environment) {
-        environment.jersey().register(new TodoInstanceResource(new TodoInstanceHandlerImpl()));
-        environment.jersey().register(new TodoListResource(new TodoListHandlerImpl()));
+
+        TodoDb database = new TodoDb();
+        environment.jersey().register(new TodoInstanceResource(new TodoInstanceHandlerImpl(database)));
+        environment.jersey().register(new TodoListResource(new TodoListHandlerImpl(database)));
     }
 
 }

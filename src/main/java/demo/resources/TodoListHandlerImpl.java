@@ -1,5 +1,6 @@
 package demo.resources;
 
+import demo.db.TodoDb;
 import demowizard.generated.TodoList.TodoListHandler;
 import demowizard.generated.definitions.Todo;
 
@@ -10,39 +11,33 @@ import java.util.concurrent.CompletionStage;
 
 public class TodoListHandlerImpl implements TodoListHandler {
 
-    public Todo getTodo() {
-        return (new Todo.Builder())
-                .withId("xyz")
-                .withTitle("learn things")
-                .withCompleted(false)
-                .build();
-    }
+    private TodoDb database;
 
-    public List<Todo> todoList() {
-        List<Todo> myList = new ArrayList<>();
-        myList.add(getTodo());
-        myList.add(getTodo());
-        myList.add(getTodo());
-        return myList;
+    public TodoListHandlerImpl(TodoDb db) {
+        this.database = db;
     }
 
     @Override
     public CompletionStage<AddTodoResponse> addTodo(Todo body) {
         return CompletableFuture.supplyAsync(() -> {
-            return AddTodoResponse.Ok(body);
+            Todo inserted = database.add(body);
+            return AddTodoResponse.Ok(inserted);
         });
     }
 
     @Override
     public CompletionStage<GetTodoListResponse> getTodoList() {
         return CompletableFuture.supplyAsync(() -> {
-            return GetTodoListResponse.Ok(todoList());
+            return GetTodoListResponse.Ok(new ArrayList<>(database.getAll()));
         });
     }
 
     @Override
     public CompletionStage<DeleteAllTodosResponse> deleteAllTodos() {
         return CompletableFuture.supplyAsync(() -> {
+            database.getAll().forEach((todo) -> {
+                database.delete(todo.getId().orElse(""));
+            });
             return DeleteAllTodosResponse.Ok;
         });
     }

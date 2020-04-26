@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  description: Todo Backend API
+  description: Todo Backend API using Dropwizard, Guardrail
   version: 1.0.0
   title: Todos API
 externalDocs:
