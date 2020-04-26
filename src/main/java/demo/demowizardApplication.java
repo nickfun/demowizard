@@ -6,6 +6,8 @@ import demo.resources.TodoListHandlerImpl;
 import demowizard.generated.TodoInstance.TodoInstanceResource;
 import demowizard.generated.TodoList.TodoListResource;
 import io.dropwizard.Application;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
@@ -22,7 +24,9 @@ public class demowizardApplication extends Application<demowizardConfiguration> 
 
     @Override
     public void initialize(final Bootstrap<demowizardConfiguration> bootstrap) {
-        // when needed, application initialization
+        bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
+                bootstrap.getConfigurationSourceProvider(),
+                new EnvironmentVariableSubstitutor(true)));
     }
 
     @Override

@@ -1,3 +1,8 @@
+server:
+  type: simple
+  connector:
+    type: http
+    port: ${PORT}
 logging:
   level: INFO
   loggers:
